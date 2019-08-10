@@ -40,14 +40,16 @@ export default {
   data() {
       return {
           kw: '',
-          movieList: []
+          movieList: [],
       }
   },
   watch:{
       kw(){
          var that = this;
           this.cancelRequest()
-          this.axios.get(('/api/searchList?cityId=10&kw='+ this.kw),{
+          this.isLoading = true
+          var cityId = this.$store.state.city.id
+          this.axios.get(('/api/searchList?cityId='+cityId+'&kw='+ this.kw),{
             cancelToken: new this.axios.CancelToken(function executor(c) {
                 that.source = c;
             })
@@ -58,6 +60,7 @@ export default {
               }else{
                   this.movieList = []
               }
+              this.isLoading = false
           }).catch((err) => {
                 if (this.axios.isCancel(err)) {
                     console.log('Rquest canceled', err.message); //请求如果被取消，这里是返回取消的message
