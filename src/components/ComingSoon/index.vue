@@ -5,7 +5,7 @@
         <ul>
             <!-- <li>{{ user.name }}</li> -->
             <li class="pullDown">{{pullDownMsg}}</li>
-            <li v-for="item in comingList" :key="item.id">
+            <li v-for="item in comingList" :key="item.id"  @tap="movieDetail(item.id)">
                 <div class="pic_show">
                     <img :src="item.img | setWH('128.180')">
                 </div>
@@ -68,6 +68,9 @@ export default {
                     }
                 })
             }
+        },
+        movieDetail(id){
+            this.$router.push('/movie/detail/2/'+id)
         }
     }
 }

@@ -4,8 +4,8 @@
      <Scroller v-else  :handleToScroll="handleToScroll" :handleToTouchEnd="handleToTouchEnd">
          <ul>
             <li class="pullDown">{{ pullDownMsg }}</li>
-            <li v-for="(item,index) in movieList" :key="index">
-                <div class="pic_show" @tap="handleToDetail"><img :src="item.img | setWH('128.180')"></div>
+            <li @tap="movieDetail(item.id)" v-for="(item,index) in movieList" :key="index">
+                <div class="pic_show"><img :src="item.img | setWH('128.180')"></div>
                 <div class="info_list">
                     <h2>{{ item.nm }} <img src="@/assets/maxs.png" v-show="item.version.indexOf('v3d')!=-1"></h2>
                     <p>观众评 <span class="grade">{{ item.sc }}</span></p>
@@ -96,6 +96,9 @@ export default {
                     }
                 })
             }
+        },
+        movieDetail(id){
+            this.$router.push('/movie/detail/1/'+id)
         }
     }
 }
